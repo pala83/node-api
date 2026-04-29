@@ -1,18 +1,20 @@
 {
   "type": "module",
-  "name": "curso-node",
+  "name": "pre-entrega",
   "version": "1.0.0",
-  "description": "",
-  "main": "index.js",
+  "description": "Un simulacro de una API de productos utilizando Fake Store API",
+  "main": "app.js",
   "scripts": {
-    "test": "echo \"Error: no test specified\" && exit 1",
-    "start": "node script.js"
+    "start": "node app.js",
+    "dev": "node --watch app.js",
+    "test": "mocha"
   },
   "keywords": [],
-  "author": "",
+  "author": "El_Pala",
   "license": "ISC",
   "packageManager": "pnpm@10.13.1",
   "dependencies": {
-    "axios": "^1.15.2"
+    "chai": "^6.2.2",
+    "mocha": "^11.7.5"
   }
 }
