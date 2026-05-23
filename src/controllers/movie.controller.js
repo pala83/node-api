@@ -1,20 +1,36 @@
-import { validateMovie } from '../schemas/movie.js';
+import movieService from "../services/movie.service.js";
 
-export class MovieController {
-    constructor({ movieModel }) {
-        this.movieModel = movieModel;
-    }
+class MovieController {
+	async getAll(req, res, next) {
+		try {
+			const { genre } = req.query;
+			const movies = await movieService.getAllMovies({ genre });
+			res
+				.status(200)
+				.json({ status: "success", result: movies.length, data: movies });
+		} catch (error) {
+			next(error);
+		}
+	}
 
-    async createMovie(req, res) {
-        const validateData = validateMovie(req.body);
-        if(!validateData.success) {
-            return res.status(400).json({ error: validateData.error });
-        }
-        try {
-            const movie = await this.movieModel.createMovie(validateData.data);
-            res.status(201).json(movie);
-        } catch (error) {
-            res.status(500).json({ error: error.message });
-        }
-    }
+	async getById(req, res, next) {
+		try {
+			const { id } = req.params;
+			const movie = await movieService.getMovieById({ id });
+			res.status(200).json({ status: "success", data: movie });
+		} catch (error) {
+			next(error);
+		}
+	}
+
+	async createMovie(req, res, next) {
+		try {
+			const movie = await movieService.createMovie({ data: req.body });
+			res.status(201).json({ status: "success", data: movie });
+		} catch (error) {
+			next(error);
+		}
+	}
 }
+
+export default new MovieController();
