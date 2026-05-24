@@ -1,0 +1,42 @@
+[
+  {
+    "id": "1",
+    "name": "Huevos",
+    "price": 2.99,
+    "description": "Caja de huevos frescos de granja",
+    "category": "Alimentos",
+    "stock": 100
+  },
+  {
+    "id": "2",
+    "name": "Esponja de lavado",
+    "price": 1.49,
+    "description": "Esponja de lavado para uso doméstico",
+    "category": "Hogar",
+    "stock": 200
+  },
+  {
+    "id": "3",
+    "name": "Pan",
+    "price": 0.99,
+    "description": "Pan integral recién horneado",
+    "category": "Alimentos",
+    "stock": 150
+  },
+  {
+    "id": "4",
+    "name": "Manzanas",
+    "price": 0.79,
+    "description": "Manzanas rojas frescas de árbol",
+    "category": "Alimentos",
+    "stock": 300
+  },
+  {
+    "id": "5",
+    "name": "Tornillos",
+    "price": 4.99,
+    "description": "Tornillos de acero inoxidable",
+    "category": "Herramientas",
+    "stock": 100
+  }
+]

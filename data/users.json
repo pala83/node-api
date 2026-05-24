@@ -1,0 +1,57 @@
+[
+  {
+    "id": "1",
+    "name": "John Doe",
+    "email": "john.doe@example.com",
+    "phone": "123-456-7890",
+    "products": [
+      {
+        "id": "1",
+        "quantity": 12
+      },
+      {
+        "id": "2",
+        "quantity": 5
+      }
+    ]
+  },
+  {
+    "id": "2",
+    "name": "Jane Smith",
+    "email": "jane.smith@example.com",
+    "phone": "098-765-4321",
+    "products": [
+      {
+        "id": "3",
+        "quantity": 2
+      },
+      {
+        "id": "4",
+        "quantity": 1
+      }
+    ]
+  },
+  {
+    "id": "3",
+    "name": "Alice Johnson",
+    "email": "alice.johnson@example.com",
+    "phone": "555-123-4567",
+    "products": [
+      {
+        "id": "1",
+        "quantity": 6
+      },
+      {
+        "id": "5",
+        "quantity": 3
+      }
+    ]
+  },
+  {
+    "id": "4",
+    "name": "Bob Brown",
+    "email": "bob.brown@example.com",
+    "phone": "111-222-3333",
+    "products": []
+  }
+]
