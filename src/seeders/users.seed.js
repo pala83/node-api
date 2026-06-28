@@ -6,6 +6,12 @@ const priceBySku = Object.fromEntries(products.map((p) => [p.sku, p.price]));
 
 const usersSeeders = [
   {
+    name: "Usuario Default",
+    email: "user@email.com",
+    password: "strongPass123",
+    purchases: [],
+  },
+  {
     name: "Ana Perez",
     email: "ana@email.com",
     password: "strongPass123",

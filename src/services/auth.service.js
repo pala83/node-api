@@ -24,7 +24,7 @@ export const authService = {
 
     await userRepository.saveRefreshToken(user.id, refreshToken);
 
-    return { accessToken, refreshToken, user: { id: user.id, name: user.name, email: user.email } };
+    return { token: accessToken, refreshToken, user: { id: user.id, name: user.name, email: user.email } };
   },
 
   async login({ email, password }) {
@@ -40,7 +40,7 @@ export const authService = {
 
     await userRepository.saveRefreshToken(user.id, refreshToken);
 
-    return { accessToken, refreshToken, user: { id: user.id, name: user.name, email: user.email } };
+    return { token: accessToken, refreshToken, user: { id: user.id, name: user.name, email: user.email } };
   },
 
   async refresh(token) {
@@ -65,7 +65,7 @@ export const authService = {
 
     await userRepository.saveRefreshToken(payload.id, refreshToken);
 
-    return { accessToken, refreshToken };
+    return { token: accessToken, refreshToken };
   },
 
   async logout(token) {

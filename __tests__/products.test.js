@@ -29,6 +29,7 @@ describe("CRUD /api/products", () => {
         name: "Producto test CRUD",
         price: 1000,
         stock: 10,
+        sku: `TEST-CRUD-${Date.now()}`,
       });
 
     expect(response.status).toBe(201);

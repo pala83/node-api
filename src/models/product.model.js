@@ -14,11 +14,11 @@ const CATEGORIES = z.enum([
 
 export const productSchema = z.object({
   name: z.string().min(1),
-  description: z.string().min(1),
+  description: z.string().min(1).optional(),
   price: z.number().positive(),
   sku: z.string().min(1),
   stock: z.number().int().nonnegative(),
-  category: z.array(CATEGORIES).min(1),
+  category: z.array(CATEGORIES).min(1).optional(),
 });
 
 export const productUpdateSchema = productSchema.partial();

@@ -40,7 +40,7 @@ export const productController = {
   async remove(req, res, next) {
     try {
       await productService.remove(req.params.id);
-      res.status(204).send();
+      res.status(200).json({ message: 'Product deleted' });
     } catch (err) {
       next(err);
     }
