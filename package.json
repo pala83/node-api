@@ -11,7 +11,7 @@
     "seed": "node src/seeders/index.js"
   },
   "keywords": [],
-  "author": "",
+  "author": "El Pala",
   "license": "ISC",
   "packageManager": "pnpm@10.26.2",
   "pnpm": {
