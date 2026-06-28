@@ -6,6 +6,12 @@ const notFound = () => {
   return err;
 };
 
+const skuConflict = () => {
+  const err = new Error('Product SKU already exists');
+  err.statusCode = 409;
+  return err;
+};
+
 export const productService = {
   async getAll() {
     return productRepository.findAll();
@@ -18,6 +24,8 @@ export const productService = {
   },
 
   async create(data) {
+    const existing = await productRepository.findBySku(data.sku);
+    if (existing) throw skuConflict();
     return productRepository.create(data);
   },
 

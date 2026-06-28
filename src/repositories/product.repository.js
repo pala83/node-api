@@ -6,6 +6,8 @@ import {
   addDoc,
   updateDoc,
   deleteDoc,
+  query,
+  where,
 } from 'firebase/firestore';
 import db from '../firebase.js';
 
@@ -15,6 +17,14 @@ export const productRepository = {
   async findAll() {
     const snapshot = await getDocs(col);
     return snapshot.docs.map(d => ({ id: d.id, ...d.data() }));
+  },
+
+  async findBySku(sku) {
+    const q = query(col, where('sku', '==', sku));
+    const snapshot = await getDocs(q);
+    if (snapshot.empty) return null;
+    const d = snapshot.docs[0];
+    return { id: d.id, ...d.data() };
   },
 
   async findById(id) {
