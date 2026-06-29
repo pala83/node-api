@@ -1,0 +1,112 @@
+[
+	{
+		"name": "Budin de limón",
+		"price": 2500,
+		"category": "dulces",
+		"description": "Delicioso budin casero con sabor a limón.",
+		"imageUrl": "https://i.ibb.co/Nn9dgFJY/budin-limon.png",
+		"reviews": 4.7,
+		"stock": 15,
+		"id": "1"
+	},
+	{
+		"name": "Medialunas",
+		"price": 1200,
+		"category": "dulces",
+		"description": "Medialunas hojaldradas, ideales para el desayuno.",
+		"imageUrl": "https://i.ibb.co/pv8662h8/medialunas.png",
+		"reviews": 4.6,
+		"stock": 11,
+		"id": "2"
+	},
+	{
+		"name": "Facturas mixtas",
+		"price": 1400,
+		"category": "dulces",
+		"description": "Caja surtida de facturas: vigilantes, cañoncitos y bolas de fraile.",
+		"imageUrl": "https://i.ibb.co/vxPhNbrZ/facturas.png",
+		"reviews": 4.5,
+		"stock": 1,
+		"id": "3"
+	},
+	{
+		"name": "Pan francés",
+		"price": 500,
+		"category": "salados",
+		"description": "Baguette recién horneada con corteza crujiente.",
+		"imageUrl": "https://i.ibb.co/vCVXLDVb/pan-frances.png",
+		"reviews": 4.2,
+		"stock": 5,
+		"id": "4"
+	},
+	{
+		"name": "Lomito en pan",
+		"price": 3200,
+		"category": "salados",
+		"description": "Pan tipo sándwich relleno con lomo y vegetales.",
+		"imageUrl": "https://i.ibb.co/1tgLm6kz/lomito-pan.png",
+		"reviews": 4.4,
+		"stock": 10,
+		"id": "5"
+	},
+	{
+		"name": "Tarta de jamón y queso",
+		"price": 1800,
+		"category": "salados",
+		"description": "Porción de tarta casera de jamón y queso.",
+		"imageUrl": "https://i.ibb.co/B55NsNQR/tarta-jamon-queso.png",
+		"reviews": 4.3,
+		"stock": 150,
+		"id": "6"
+	},
+	{
+		"name": "Rosca de anís",
+		"price": 1500,
+		"category": "dulces",
+		"description": "Rosca tradicional con toque de anís y azúcar glas.",
+		"imageUrl": "https://i.ibb.co/8L1fy8zG/rosca-anis.png",
+		"reviews": 4.1,
+		"stock": 7,
+		"id": "7"
+	},
+	{
+		"name": "Cachito de jamón",
+		"price": 900,
+		"category": "salados",
+		"description": "Bocadillo de masa hojaldrada relleno de jamón.",
+		"imageUrl": "https://i.ibb.co/1fB3tBbF/cachito-jamon.png",
+		"reviews": 3.9,
+		"stock": 200,
+		"id": "8"
+	},
+	{
+		"name": "Brioche con crema",
+		"price": 1600,
+		"category": "dulces",
+		"description": "Suave brioche relleno de crema pastelera.",
+		"imageUrl": "https://i.ibb.co/DDtNqD2g/brioche-crema.png",
+		"reviews": 4.8,
+		"stock": 150,
+		"id": "9"
+	},
+	{
+		"name": "Fugazza",
+		"price": 2000,
+		"category": "salados",
+		"description": "Fugazza con cebolla y orégano, ideal para compartir.",
+		"imageUrl": "https://i.ibb.co/mr1W6FZd/fugazza.png",
+		"reviews": 4,
+		"stock": 9,
+		"id": "10"
+	},
+	{
+		"name": "Alfajores de maicena",
+		"price": 700,
+		"category": "dulces",
+		"description": "Alfajores caseros rellenos con dulce de leche y coco.",
+		"imageUrl": "https://i.ibb.co/V0ynvZxZ/alfajores.png",
+		"reviews": 4.9,
+		"stock": 2,
+		"id": "11"
+	}
+]
