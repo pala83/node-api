@@ -1,4 +1,5 @@
 import { ItemDetail } from '@components/ItemDetail/ItemDetail';
+import { getProductById } from '@services/products';
 import { useEffect, useState } from 'react';
 import { useParams } from 'react-router-dom';
 
@@ -11,12 +12,7 @@ export const ItemDetailContainer = () => {
 	useEffect(() => {
 		setLoading(true);
 		setError(null);
-		const base = import.meta.env.DEV ? '/api' : import.meta.env.VITE_API_BASE;
-		fetch(`${base}/products/${id}`)
-			.then((response) => {
-				if (!response.ok) throw new Error('Network response was not ok');
-				return response.json();
-			})
+		getProductById(id)
 			.then((product) => {
 				const isNotFoundString =
 					typeof product === 'string' &&

@@ -1,4 +1,4 @@
-const categorys = ['dulces', 'salados'];
+import { getProductCategories } from './categories';
 
 export const validateProducts = (products, fileRequired = true) => {
 	const errors = {};
@@ -15,16 +15,12 @@ export const validateProducts = (products, fileRequired = true) => {
 	if (!products.description.trim()) {
 		errors.description = 'La descripción es obligatoria';
 	}
-	if (!products.category.trim()) {
-		errors.category = 'La categoría es obligatoria';
+
+	// La categoria ahora es un arreglo: se debe elegir al menos una.
+	if (getProductCategories(products).length === 0) {
+		errors.category = 'Debe seleccionar al menos una categoría';
 	}
 
-	if (
-		!products.category.trim() ||
-		!categorys.includes(products.category.toLowerCase())
-	) {
-		errors.category = `La categoría debe ser una de las siguientes: ${categorys.join(', ')}`;
-	}
 	if (
 		Number.isNaN(products.reviews) ||
 		Number(products.reviews) < 0 ||
@@ -37,7 +33,7 @@ export const validateProducts = (products, fileRequired = true) => {
 	}
 
 	if (fileRequired && !products.file) {
-		errors.imageUrl = 'La imagen es obligatoria';
+		errors.file = 'La imagen es obligatoria';
 	}
 
 	return errors;

@@ -2,6 +2,8 @@ import { Button } from '@components/Button.jsx';
 import ConfirmDialog from '@components/ConfirmDialog/ConfirmDialog';
 import { useCartContext } from '@contexts/CartContext/useCartContext';
 import { useToast } from '@contexts/ToastContext/useToast';
+import { getProductImage } from '@utils/productImage';
+import { Trash2 } from 'lucide-react';
 import { useEffect, useState } from 'react';
 
 export const CartDrawer = () => {
@@ -112,17 +114,11 @@ export const CartDrawer = () => {
 										className="flex items-start justify-between"
 									>
 										<div className="flex items-center gap-3">
-											{item.imageUrl ? (
-												<img
-													src={item.imageUrl}
-													alt={item.name}
-													className="w-16 h-16 object-cover rounded"
-												/>
-											) : (
-												<div className="w-16 h-16 bg-gray-100 rounded flex items-center justify-center text-xs text-gray-400">
-													No image
-												</div>
-											)}
+											<img
+												src={getProductImage(item.sku, item.imageUrl)}
+												alt={item.name}
+												className="w-16 h-16 object-cover rounded"
+											/>
 											<div>
 												<div className="font-medium">{item.name}</div>
 												<div className="text-sm text-gray-500">
@@ -139,24 +135,7 @@ export const CartDrawer = () => {
 											className="text-xs p-2"
 											aria-label={`Eliminar ${item.name}`}
 										>
-											<svg
-												xmlns="http://www.w3.org/2000/svg"
-												className="w-5 h-5"
-												viewBox="0 0 24 24"
-												aria-hidden="true"
-												focusable="false"
-												fill="none"
-												stroke="currentColor"
-												strokeWidth="2"
-												strokeLinecap="round"
-												strokeLinejoin="round"
-											>
-												<path d="M10 11v6" />
-												<path d="M14 11v6" />
-												<path d="M19 6v14a2 2 0 0 1-2 2H7a2 2 0 0 1-2-2V6" />
-												<path d="M3 6h18" />
-												<path d="M8 6V4a2 2 0 0 1 2-2h4a2 2 0 0 1 2 2v2" />
-											</svg>
+											<Trash2 className="w-5 h-5" aria-hidden="true" />
 										</Button>
 									</li>
 								))}

@@ -1,78 +1,30 @@
+import {
+	CircleCheck,
+	CircleX,
+	Info,
+	TriangleAlert,
+} from 'lucide-react';
 import { useCallback, useEffect, useMemo, useState } from 'react';
 import { createPortal } from 'react-dom';
 
 const typeStyles = {
 	success: {
 		accent: 'border-green-500',
-		icon: (
-			<svg
-				width="20"
-				height="20"
-				viewBox="0 0 20 20"
-				fill="currentColor"
-				className="text-green-400"
-				aria-hidden="true"
-				focusable="false"
-			>
-				<path
-					fillRule="evenodd"
-					clipRule="evenodd"
-					d="M10 18a8 8 0 100-16 8 8 0 000 16zm3.707-9.707a1 1 0 00-1.414-1.414L9 10.172 7.707 8.879A1 1 0 106.293 10.293l2 2a1 1 0 001.414 0l4-4z"
-				/>
-			</svg>
-		),
+		icon: <CircleCheck className="w-5 h-5 text-green-400" aria-hidden="true" />,
 	},
 	warning: {
 		accent: 'border-yellow-500',
 		icon: (
-			<svg
-				width="20"
-				height="20"
-				viewBox="0 0 20 20"
-				fill="currentColor"
-				className="text-yellow-400"
-				aria-hidden="true"
-				focusable="false"
-			>
-				<path d="M8.257 3.099c.765-1.36 2.722-1.36 3.486 0l6.518 11.59c.75 1.334-.213 2.986-1.742 2.986H3.48c-1.53 0-2.492-1.652-1.742-2.987L8.257 3.1zM11 14a1 1 0 10-2 0 1 1 0 002 0zm-1-2a1 1 0 01-1-1V7a1 1 0 112 0v4a1 1 0 01-1 1z" />
-			</svg>
+			<TriangleAlert className="w-5 h-5 text-yellow-400" aria-hidden="true" />
 		),
 	},
 	info: {
 		accent: 'border-blue-500',
-		icon: (
-			<svg
-				width="20"
-				height="20"
-				viewBox="0 0 20 20"
-				fill="currentColor"
-				className="text-blue-400"
-				aria-hidden="true"
-				focusable="false"
-			>
-				<path d="M18 10A8 8 0 11 2 10a8 8 0 0116 0zm-8-4a1 1 0 100 2 1 1 0 000-2zm-1 4a1 1 0 000 2h1v3a1 1 0 102 0v-4a1 1 0 00-1-1H9z" />
-			</svg>
-		),
+		icon: <Info className="w-5 h-5 text-blue-400" aria-hidden="true" />,
 	},
 	danger: {
 		accent: 'border-red-500',
-		icon: (
-			<svg
-				width="20"
-				height="20"
-				viewBox="0 0 20 20"
-				fill="currentColor"
-				className="text-red-400"
-				aria-hidden="true"
-				focusable="false"
-			>
-				<path
-					fillRule="evenodd"
-					clipRule="evenodd"
-					d="M10 18a8 8 0 100-16 8 8 0 000 16zM7.293 7.293a1 1 0 011.414 0L10 8.586l1.293-1.293a1 1 0 111.414 1.414L11.414 10l1.293 1.293a1 1 0 11-1.414 1.414L10 11.414l-1.293 1.293a1 1 0 11-1.414-1.414L8.586 10 7.293 8.707a1 1 0 010-1.414z"
-				/>
-			</svg>
-		),
+		icon: <CircleX className="w-5 h-5 text-red-400" aria-hidden="true" />,
 	},
 	apu: {
 		accent: 'border-orange-500',

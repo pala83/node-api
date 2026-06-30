@@ -3,6 +3,7 @@ import CartDrawer from '@components/CartDrawer/CartDrawer';
 import { ItemDetailContainer } from '@components/ItemDetailContainer/ItemDetailContainer';
 import { ItemListContainer } from '@components/ItemListContainer/ItemListContainer';
 import { CartProvider } from '@contexts/CartContext/CartProvider';
+import { ProductsProvider } from '@contexts/ProductsContext/ProductsProvider';
 import { ToastProvider } from '@contexts/ToastContext/ToastProvider';
 import { BrowserRouter, Route, Routes } from 'react-router-dom';
 import { MainLayout } from './layouts/MainLayout';
@@ -16,6 +17,7 @@ function App() {
 		<BrowserRouter>
 			<ToastProvider>
 				<CartProvider>
+					<ProductsProvider>
                     <Nav />
 					<Routes>
 						<Route element={<MainLayout />}>
@@ -41,6 +43,7 @@ function App() {
 						</Route>
 					</Routes>
 					<CartDrawer />
+					</ProductsProvider>
 				</CartProvider>
 			</ToastProvider>
 		</BrowserRouter>

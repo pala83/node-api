@@ -5,7 +5,9 @@ import { useState } from 'react';
 import { Navigate, useNavigate } from 'react-router-dom';
 
 export const Login = () => {
-	const [userForm, setUserForm] = useState({ name: '', password: '' });
+	const [userForm, setUserForm] = useState({ email: '', password: '' });
+	const [error, setError] = useState('');
+	const [loading, setLoading] = useState(false);
 
 	const { user, login } = useAuthContext();
 
@@ -20,23 +22,28 @@ export const Login = () => {
 		setUserForm({ ...userForm, [name]: value });
 	};
 
-	const handleOnSubmit = (e) => {
+	const handleOnSubmit = async (e) => {
 		e.preventDefault();
-		const success = login(userForm.name, userForm.password);
-		if (success) {
+		setError('');
+		setLoading(true);
+		try {
+			await login(userForm.email, userForm.password);
 			navigate('/admin/alta-productos');
-		} else {
-			alert('Credenciales inválidas');
-			setUserForm({ name: '', password: '' });
+		} catch (err) {
+			setError(err.message);
+			setUserForm((prev) => ({ ...prev, password: '' }));
+		} finally {
+			setLoading(false);
 		}
 	};
 
 	return (
-		<form className='space-y-4 w-md px-5' onSubmit={handleOnSubmit}>
+		<form className="space-y-4 w-md px-5" onSubmit={handleOnSubmit}>
 			<InputForm
-				label="Nombre:"
-				name="name"
-				value={userForm.name}
+				label="Email:"
+				type="email"
+				name="email"
+				value={userForm.email}
 				onChange={handleChange}
 				required
 			/>
@@ -48,8 +55,12 @@ export const Login = () => {
 				onChange={handleChange}
 				required
 			/>
-			<Button type="submit" disabled={!userForm.name || !userForm.password}>
-				Iniciar Sesión
+			{error && <small className="block pl-0.5 text-red-500">{error}</small>}
+			<Button
+				type="submit"
+				disabled={loading || !userForm.email || !userForm.password}
+			>
+				{loading ? 'Ingresando...' : 'Iniciar Sesión'}
 			</Button>
 		</form>
 	);

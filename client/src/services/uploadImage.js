@@ -44,6 +44,14 @@ export const uploadToImgbb = async (file) => {
 	form.append('image', base64);
 	form.append('key', IMGBB_API_KEY);
 
+	// Como subimos en base64, imgbb no puede detectar el nombre del archivo y
+	// le asigna uno aleatorio. Enviamos `name` (sin extensión, imgbb agrega la
+	// suya) para conservar el nombre original.
+	const fileName = file.name?.replace(/\.[^/.]+$/, '');
+	if (fileName) {
+		form.append('name', fileName);
+	}
+
 	const response = await fetch(ENDPOINT, { method: 'POST', body: form });
 
 	// Parseamos la respuesta como JSON

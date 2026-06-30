@@ -1,4 +1,5 @@
 import { Button } from '@components/Button.jsx';
+import { LoaderCircle } from 'lucide-react';
 
 export const ConfirmDialog = ({
 	open,
@@ -36,29 +37,10 @@ export const ConfirmDialog = ({
 						disabled={loading}
 					>
 						{loading && (
-							<svg
+							<LoaderCircle
 								className="w-4 h-4 mr-2 animate-spin"
-								viewBox="0 0 24 24"
-								fill="none"
-								xmlns="http://www.w3.org/2000/svg"
 								aria-hidden="true"
-							>
-								<title>Loading</title>
-								<circle
-									cx="12"
-									cy="12"
-									r="10"
-									stroke="currentColor"
-									strokeWidth="4"
-									opacity="0.25"
-								/>
-								<path
-									d="M22 12a10 10 0 00-10-10"
-									stroke="currentColor"
-									strokeWidth="4"
-									strokeLinecap="round"
-								/>
-							</svg>
+							/>
 						)}
 						{confirmButtonText}
 					</Button>

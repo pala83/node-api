@@ -1,29 +1,33 @@
-import { useState } from 'react';
+import {
+	getSession,
+	login as loginRequest,
+	logout as logoutRequest,
+} from '@services/auth';
+import { useEffect, useState } from 'react';
 import { AuthContext } from './AuthContext';
 
 export const AuthProvider = ({ children }) => {
-	const [user, setUser] = useState(() => {
-		const saved = sessionStorage.getItem('authUser');
-		if (saved) {
-			return JSON.parse(saved);
-		}
-		return null;
-	});
+	// Rehidratamos el usuario desde la sesion persistida (si hay token vigente).
+	const [user, setUser] = useState(() => getSession()?.user ?? null);
 
-	const login = (name, password) => {
-		if (name === 'admin' && password === '1234') {
-			const session = { name };
-			setUser(session);
-			sessionStorage.setItem('authUser', JSON.stringify(session));
-			return true;
-		}
-		return false;
+	// Si el refresh automatico falla (sesion expirada), sincronizamos el estado.
+	useEffect(() => {
+		const onExpired = () => setUser(null);
+		window.addEventListener('auth:session-expired', onExpired);
+		return () => window.removeEventListener('auth:session-expired', onExpired);
+	}, []);
+
+	// Login real contra la API: devuelve el usuario o lanza un Error con el motivo.
+	const login = async (email, password) => {
+		const session = await loginRequest({ email, password });
+		setUser(session.user);
+		return session.user;
 	};
 
-    const isLoggedIn = !!user;
+	const isLoggedIn = !!user;
 
-	const logout = () => {
-		sessionStorage.removeItem('authUser');
+	const logout = async () => {
+		await logoutRequest();
 		setUser(null);
 		alert('Has cerrado sesión correctamente.');
 	};

@@ -5,7 +5,9 @@ export const ProductFormUI = ({
 	product,
 	errors,
 	loading,
+	categories = [],
 	onChange,
+	onCategoryToggle,
 	onFileChange,
 	onSubmit,
 }) => {
@@ -29,14 +31,37 @@ export const ProductFormUI = ({
                 error={errors.price}
                 required
             />
-            <InputForm
-                label="Categoria:"
-                name="category"
-                value={product.category}
-                onChange={onChange}
-                error={errors.category}
-                required
-            />
+            <fieldset className="flex flex-col gap-1 text-neutral-600 dark:text-neutral-300">
+                <legend className="pl-0.5 text-sm">
+                    Categorias (podés elegir varias):
+                </legend>
+                <div className="flex flex-wrap gap-2 pt-1">
+                    {categories.map((category) => {
+                        const checked = product.category.includes(category);
+                        return (
+                            <label
+                                key={category}
+                                className={`cursor-pointer select-none rounded-full border px-3 py-1 text-sm capitalize transition-colors ${
+                                    checked
+                                        ? 'border-blue-600 bg-blue-600 text-white'
+                                        : 'border-neutral-300 hover:bg-neutral-100 dark:border-neutral-700 dark:hover:bg-neutral-800'
+                                }`}
+                            >
+                                <input
+                                    type="checkbox"
+                                    className="sr-only"
+                                    checked={checked}
+                                    onChange={() => onCategoryToggle(category)}
+                                />
+                                {category}
+                            </label>
+                        );
+                    })}
+                </div>
+                {errors.category && (
+                    <small className="pl-0.5 text-red-500">{errors.category}</small>
+                )}
+            </fieldset>
             <InputForm
                 label="Descripcion:"
                 type="textarea"
