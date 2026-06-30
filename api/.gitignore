@@ -1,0 +1,14 @@
+# Dependencias
+node_modules
+
+# Archivos .env con valores reales (gitignored). La plantilla documentada
+# de TODAS las variables está en la raíz del monorepo: /.env.local
+.env
+.env.local
+.env.*.local
+
+# Logs
+*.log
+
+# Vercel
+.vercel

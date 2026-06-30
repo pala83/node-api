@@ -24,5 +24,7 @@ dist-ssr
 *.sw?
 
 *.lock
+
+# Archivos .env con valores reales (gitignored). La plantilla documentada
+# de TODAS las variables está en la raíz del monorepo: /.env.local
 .env
-scripts

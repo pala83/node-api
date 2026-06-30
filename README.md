@@ -63,7 +63,40 @@ MEASUREMENT_ID=...
 # Secretos JWT
 JWT_SECRET=...
 JWT_REFRESH_SECRET=...
+
+# Origen(es) permitidos por CORS (coma-separados). Vacío en dev = localhost.
+CORS_ORIGINS=
 ```
+
+---
+
+## 🚢 Despliegue en Vercel (monorepo)
+
+El repo es un monorepo pnpm con **dos workspaces que se despliegan como dos proyectos Vercel separados**, cada uno con su propio `vercel.json`:
+
+### 1. API — `api/`
+- **Root Directory** del proyecto Vercel: `api`
+- Corre como **serverless function** (`api/vercel.json` → `@vercel/node` sobre `index.js`, que exporta la app de Express). `app.listen` solo se ejecuta fuera de Vercel (guard `if (!process.env.VERCEL)`).
+- **Environment Variables**: `API_KEY`, `AUTH_DOMAIN`, `PROJECT_ID`, `STORAGE_BUCKET`, `MESSAGING_SENDER_ID`, `APP_ID`, `MEASUREMENT_ID`, `JWT_SECRET`, `JWT_REFRESH_SECRET` y **`CORS_ORIGINS`** = URL del frontend (p. ej. `https://mi-frontend.vercel.app`).
+
+### 2. Cliente — `client/`
+- **Root Directory** del proyecto Vercel: `client`
+- SPA Vite. `client/vercel.json` define el build y el rewrite a `index.html`.
+- **Environment Variables**: `VITE_API_URL` = URL de la API desplegada **incluyendo `/api`** (p. ej. `https://mi-api.vercel.app/api`) y `VITE_IMGBB_API_KEY`.
+
+> El CORS de la API es **restrictivo**: solo acepta los orígenes de `CORS_ORIGINS`. Debe coincidir exactamente con el dominio del frontend (sin `/` final).
+
+### Variables de entorno (setup local)
+La plantilla **`/.env.local`** (en la raíz, versionada, solo documentación) lista
+todas las variables necesarias. Cada quien debe crear, con valores reales:
+- **`api/.env`** — backend (Firebase, JWT, `CORS_ORIGINS`, `PORT`). Gitignored.
+- **`client/.env`** — frontend (`VITE_API_URL` con `/api`, `VITE_IMGBB_API_KEY`). Gitignored.
+
+> ⚠️ El cliente es Vite: **no** crear un `client/.env.local` en blanco — Vite lo carga
+> con prioridad sobre `client/.env` y pisaría los valores reales. Por eso la plantilla
+> vive en la raíz (donde no la carga ninguna herramienta).
+
+Luego: `pnpm dev` levanta API (watch) + cliente (Vite); `pnpm build` buildea el cliente.
 
 ---
 

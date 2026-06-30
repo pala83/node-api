@@ -6,8 +6,8 @@
   "scripts": {
     "dev": "pnpm --parallel -r run dev",
     "dev:api": "pnpm --filter node-api run dev",
-    "dev:client": "pnpm --filter pre-entrega run dev",
-    "build": "pnpm --filter pre-entrega run build",
+    "dev:client": "pnpm --filter react-front run dev",
+    "build": "pnpm --filter react-front run build",
     "seed": "pnpm --filter node-api run seed",
     "test": "pnpm --filter node-api run test"
   },
