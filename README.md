@@ -70,21 +70,30 @@ CORS_ORIGINS=
 
 ---
 
-## 🚢 Despliegue en Vercel (monorepo)
+## 🚢 Despliegue en Vercel (un solo proyecto)
 
-El repo es un monorepo pnpm con **dos workspaces que se despliegan como dos proyectos Vercel separados**, cada uno con su propio `vercel.json`:
+Todo el monorepo se despliega como **un único proyecto Vercel** con **Root Directory = raíz**
+del repo. El `vercel.json` de la raíz construye las dos cosas y las sirve en el **mismo dominio**:
 
-### 1. API — `api/`
-- **Root Directory** del proyecto Vercel: `api`
-- Corre como **serverless function** (`api/vercel.json` → `@vercel/node` sobre `index.js`, que exporta la app de Express). `app.listen` solo se ejecuta fuera de Vercel (guard `if (!process.env.VERCEL)`).
-- **Environment Variables**: `API_KEY`, `AUTH_DOMAIN`, `PROJECT_ID`, `STORAGE_BUCKET`, `MESSAGING_SENDER_ID`, `APP_ID`, `MEASUREMENT_ID`, `JWT_SECRET`, `JWT_REFRESH_SECRET` y **`CORS_ORIGINS`** = URL del frontend (p. ej. `https://mi-frontend.vercel.app`).
+- **Cliente** (`client/`) → build estático con `@vercel/static-build` (Vite, output `client/dist`).
+- **API** (`api/`) → serverless function con `@vercel/node` sobre `api/index.js` (exporta la app
+  de Express; `app.listen` solo corre fuera de Vercel, guard `if (!process.env.VERCEL)`).
+- **Ruteo**: `/api/*` → la API; el resto → el SPA (`index.html`).
 
-### 2. Cliente — `client/`
-- **Root Directory** del proyecto Vercel: `client`
-- SPA Vite. `client/vercel.json` define el build y el rewrite a `index.html`.
-- **Environment Variables**: `VITE_API_URL` = URL de la API desplegada **incluyendo `/api`** (p. ej. `https://mi-api.vercel.app/api`) y `VITE_IMGBB_API_KEY`.
+### Configuración del proyecto Vercel
+- **Root Directory**: la **raíz** del repo (NO `client` ni `api`).
+- **Build**: lo define el `vercel.json` de la raíz (no hace falta tocar Build/Output Command).
+- Requiere `pnpm-lock.yaml` y `pnpm-workspace.yaml` versionados (Vercel detecta pnpm y resuelve el workspace).
 
-> El CORS de la API es **restrictivo**: solo acepta los orígenes de `CORS_ORIGINS`. Debe coincidir exactamente con el dominio del frontend (sin `/` final).
+### Environment Variables (todas en el mismo proyecto)
+- API: `API_KEY`, `AUTH_DOMAIN`, `PROJECT_ID`, `STORAGE_BUCKET`, `MESSAGING_SENDER_ID`, `APP_ID`,
+  `MEASUREMENT_ID`, `JWT_SECRET`, `JWT_REFRESH_SECRET`.
+- Cliente: **`VITE_API_URL=/api`** (ruta relativa: cliente y API comparten dominio) y `VITE_IMGBB_API_KEY`.
+- `CORS_ORIGINS`: **opcional en este esquema** — al ser mismo dominio no hay request cross-origin.
+  (Local sí lo usa: el cliente en `:5173` pega a la API en `:3000`.)
+
+> Como cliente y API quedan en el **mismo origen**, no hay CORS en producción y `VITE_API_URL`
+> es simplemente `/api`. En local, `client/.env` usa `VITE_API_URL=http://localhost:3000/api`.
 
 ### Variables de entorno (setup local)
 La plantilla **`/.env.local`** (en la raíz, versionada, solo documentación) lista
